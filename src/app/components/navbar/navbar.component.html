@@ -1,12 +1,19 @@
-<div class="flex justify-between py-2" *ngIf="this.authService.isLoggedIn()">
+<div
+  class="flex justify-between pt-4 pb-2"
+  *ngIf="this.authService.isLoggedIn()"
+>
   <img class="ml-8" src="../../assets/devchallenges.svg" />
 
-  <div (click)="changeMenuState()" class="mr-8 inline-block relative">
+  <div (click)="changeMenuState()" class="mr-10 inline-block relative">
     <div class="flex items-center">
       <span class="">
-        <img class="w-8" src="../../assets/Facebook.svg" />
+        <img
+          class="w-8 rounded-lg"
+          src="https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+        />
       </span>
-      <span class="pl-2"> holaa </span>
+      <span class="hidden md:block pl-3 pr-6">Exameple name</span>
+      <span class="hidden md:block">r</span>
     </div>
     <div
       [ngClass]="{ hidden: !showMenu }"
