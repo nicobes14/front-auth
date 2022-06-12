@@ -1,0 +1,18 @@
+:host .drop-shadow{
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+:host .dropdown-text{
+  font-family: 'Noto Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: -0.035em;
+
+/* Gray 2 */
+}
+
+:host hr.solid{
+  border-top: 1px solid #E0E0E0;
+}
