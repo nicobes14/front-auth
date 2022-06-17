@@ -2,8 +2,8 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { clearToken } from 'src/app/context/actions/token.actions';
 import { AuthService } from 'src/app/auth.service';
+import { UserModel } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -11,18 +11,21 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  token$: Observable<string>;
-
-  token: string = '';
+  user: UserModel | any = {};
 
   showMenu = false;
 
+  user$: Observable<UserModel>;
+
   constructor(
-    private store: Store<{ access_token: string }>,
+    private storeUser: Store<{ user: UserModel }>,
     private router: Router,
     public authService: AuthService
   ) {
-    this.token$ = this.store.select('access_token');
+    this.user$ = this.storeUser.select('user');
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   goToMyProfile(): void {
@@ -42,5 +45,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showMenu = false;
+  }
 }

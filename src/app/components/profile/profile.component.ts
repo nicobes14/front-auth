@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { UserModel } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -6,13 +10,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  users: [{ title: string }] = [{ title: 'Loading...' }];
+  user$: Observable<UserModel>;
 
-  constructor() {}
+  user: UserModel | any = {};
 
-  ngOnInit(): void {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => response.json())
-      .then((json) => (this.users = json));
+  constructor(
+    private storeUser: Store<{ user: UserModel }>,
+    private router: Router
+  ) {
+    this.user$ = this.storeUser.select('user');
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
   }
+
+  editProfile(): void {
+    this.router.navigate(['me/edit']);
+  }
+
+  ngOnInit(): void {}
 }

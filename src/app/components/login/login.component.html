@@ -16,8 +16,22 @@
             src="../../assets/email-svgrepo-com.svg"
           />
         </span>
+
         <input
-          class="invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 peer placeholder:Noto Sans placeholder:text-[#828282] block bg-white w-full border border-[#BDBDBD] rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-['Noto Sans']"
+          [ngClass]="{
+            'border-red-600':
+              fillError !== '' ||
+              (!loginForm.controls.email.valid &&
+                loginForm.controls.email.dirty &&
+                loginForm.controls.email.touched &&
+                !loginForm.controls.email.pristine),
+            'text-red-600':
+              !loginForm.controls.email.valid &&
+              loginForm.controls.email.dirty &&
+              loginForm.controls.email.touched &&
+              !loginForm.controls.email.pristine
+          }"
+          class="placeholder:Noto Sans placeholder:text-[#828282] block bg-white w-full border border-[#BDBDBD] rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-['Noto Sans']"
           placeholder="Email"
           type="email"
           id="email"
@@ -38,7 +52,7 @@
           </span>
 
           <input
-            class="placeholder:noto sans placeholder:text-[#828282] block bg-white w-full border border-[#BDBDBD] rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-['Noto Sans']"
+            class="placeholder-noto sans placeholder:text-[#828282] block bg-white w-full border border-[#BDBDBD] rounded-md py-3 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-['Noto Sans']"
             placeholder="Password"
             id="password"
             type="password"
@@ -47,8 +61,16 @@
         </label>
       </div>
 
+      <div class="relative">
+        <div
+          *ngIf="fillError !== ''"
+          class="text-[#828282] absolute inset-y-0 flex items-center pl-3"
+        >
+          {{ fillError }}
+        </div>
+      </div>
+
       <button
-        [disabled]="!loginForm.valid"
         class="antialiased button text-base tracking-tight text-[#FFFFFF] w-[100%] bg-[#2F80ED] hover:bg-blue-600 my-4 py-2 rounded-lg"
         type="submit"
       >

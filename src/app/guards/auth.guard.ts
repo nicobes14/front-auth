@@ -1,6 +1,10 @@
 import { AuthService } from 'src/app/auth.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserModel } from '../core/models/user.model';
+import { Store } from '@ngrx/store';
+import { setUser } from '../context/actions/user.actions';
 
 @Injectable({
   providedIn: 'root',

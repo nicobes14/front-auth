@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCERS } from './context/app.state';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthGuard } from './guards/auth.guard';
     LoginComponent,
     NavbarComponent,
     ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

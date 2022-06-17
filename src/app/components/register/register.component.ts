@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth.service';
 import { setToken } from 'src/app/context/actions/token.actions';
+import { setUser } from 'src/app/context/actions/user.actions';
 
 @Component({
   selector: 'app-register',
@@ -46,7 +47,10 @@ export class RegisterComponent implements OnInit {
         this,
           this.store.dispatch(setToken({ access_token: data.access_token }));
         localStorage.setItem('access_token', data.access_token);
-        this.router.navigate(['/me']);
+        this.authService.getUser().subscribe((user: any) => {
+          this.store.dispatch(setUser(user));
+          this.router.navigate(['/me']);
+        });
       });
   }
 

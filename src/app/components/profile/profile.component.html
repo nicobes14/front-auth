@@ -22,6 +22,7 @@
       </div>
       <div>
         <button
+          (click)="editProfile()"
           class="px-8 py-2 border-[1px] border-[#828282] rounded-2xl font-['Noto_Sans'] tracking-tighter text-base text-[#828282]"
         >
           Edit
@@ -38,10 +39,7 @@
         </span>
       </div>
       <div>
-        <img
-          class="w-[72px] h-[72px] rounded-lg"
-          src="https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
-        />
+        <img class="w-[72px] h-[72px] rounded-lg" src="{{ user.photo }}" />
       </div>
     </div>
 
@@ -57,7 +55,7 @@
         <span
           class="align-middle font-['Noto_Sans'] text-black tracking-tighter text-base"
         >
-          Example name
+          {{ user.name }}
         </span>
       </div>
     </div>
@@ -74,7 +72,7 @@
         <span
           class="align-middle font-['Noto_Sans'] text-black tracking-tighter text-base"
         >
-          Example bio
+          {{ user.bio }}
         </span>
       </div>
     </div>
@@ -91,7 +89,24 @@
         <span
           class="align-middle font-['Noto_Sans'] text-black tracking-tighter text-base"
         >
-          nicobes14@gmail.com
+          {{ user.email }}
+        </span>
+      </div>
+    </div>
+
+    <div class="flex justify-between px-6 items-center h-24">
+      <div>
+        <span
+          class="align-middle text-sm font-['Noto_Sans'] tracking-tighter text-[#828282]"
+        >
+          EMAIL
+        </span>
+      </div>
+      <div>
+        <span
+          class="align-middle font-['Noto_Sans'] text-black tracking-tighter text-base"
+        >
+          {{ user.phone }}
         </span>
       </div>
     </div>
@@ -108,7 +123,7 @@
         <span
           class="align-middle font-['Noto_Sans'] text-black tracking-tighter text-base"
         >
-          ******************
+          ***********
         </span>
       </div>
     </div>

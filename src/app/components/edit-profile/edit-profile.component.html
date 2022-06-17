@@ -1,0 +1,118 @@
+<div class="flex flex-col items-center">
+  <div
+    class="md:flex flex-col my-2 px-6 md:place-self-center md: place-self-start md:w-[798px] h-24"
+  >
+    <div
+      [routerLink]="['/me']"
+      class="text-left w-full md:-mx-6 md:pb-4 text-blue-600 cursor-pointer md:place-self-start"
+    >
+      < Back
+    </div>
+    <div>
+      <p class="font-['Noto_Sans'] text-2xl tracking-tighter">Change info</p>
+      <p
+        class="text-sm font-['Noto_Sans'] tracking-tighter text-[#828282] max-w-[70%]"
+      >
+        Changes will be reflected to every services
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div
+      class="grid-cols-1 grid md:max-w-[768px] md:rounded-3xl md:border-[1px] md:border-[#BDBDBD] md:p-4"
+    >
+      <div class="flex justify-between px-6 items-center h-24 w-screen">
+        <div class="flex items-center">
+          <img class="w-[72px] h-[72px] rounded-lg" src="{{ user.photo }}" />
+          <input
+            type="file"
+            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-blue-600 hover:file:bg-violet-100"
+          />
+        </div>
+      </div>
+
+      <div class="px-6 h-24">
+        <div class="">
+          <span
+            class="block text-sm font-['Noto_Sans'] mt-2 tracking-tighter text-black"
+          >
+            Name
+          </span>
+        </div>
+        <input
+          formControlName="name"
+          placeholder="Enter your name..."
+          class="placeholder:text-[#828282] bg-white border w-full border-[#BDBDBD] rounded-xl pl-8 mt-2 py-3 shadow-sm sm:text-sm text-['Noto Sans']"
+        />
+      </div>
+
+      <div class="px-6 h-32">
+        <div class="">
+          <span
+            class="block text-sm font-['Noto_Sans'] mt-2 tracking-tighter text-black"
+          >
+            Bio
+          </span>
+        </div>
+        <textarea
+          formControlName="bio"
+          placeholder="Enter your bio..."
+          class="placeholder:text-[#828282] bg-white border w-full border-[#BDBDBD] rounded-xl pl-8 my-3 pt-3 pb-6 shadow-sm sm:text-sm text-['Noto Sans']"
+        ></textarea>
+      </div>
+
+      <div class="px-6 h-24">
+        <div class="">
+          <span
+            class="block text-sm font-['Noto_Sans'] mt-2 tracking-tighter text-black"
+          >
+            Phone
+          </span>
+        </div>
+        <input
+          formControlName="phone"
+          placeholder="Enter your phone..."
+          class="placeholder:text-[#828282] bg-white border w-full border-[#BDBDBD] rounded-xl pl-8 mt-2 py-3 shadow-sm sm:text-sm text-['Noto Sans']"
+        />
+      </div>
+
+      <div class="px-6 h-24">
+        <div class="">
+          <span
+            class="block text-sm font-['Noto_Sans'] mt-2 tracking-tighter text-black"
+          >
+            Emal
+          </span>
+        </div>
+        <input
+          formControlName="email"
+          placeholder="Enter your email..."
+          class="placeholder:text-[#828282] bg-white border w-full border-[#BDBDBD] rounded-xl pl-8 mt-2 py-3 shadow-sm sm:text-sm text-['Noto Sans']"
+        />
+      </div>
+
+      <div class="px-6 h-24">
+        <div class="">
+          <span
+            class="block text-sm font-['Noto_Sans'] mt-2 tracking-tighter text-black"
+          >
+            Password
+          </span>
+        </div>
+        <input
+          formControlName="password"
+          placeholder="Enter your new password..."
+          class="placeholder:text-[#828282] bg-white border w-full border-[#BDBDBD] rounded-xl pl-8 mt-2 py-3 shadow-sm sm:text-sm text-['Noto Sans']"
+        />
+      </div>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          class="bg-blue-700 mr-10 py-2 px-4 rounded-xl text-white"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

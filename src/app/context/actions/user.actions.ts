@@ -7,3 +7,8 @@ export const setUser = createAction(
 );
 
 export const clearUser = createAction('[User Component] CLEAR_USER');
+
+export const updateUser = createAction(
+  '[User Component] UPDATE_USER',
+  props<UserModel>()
+);

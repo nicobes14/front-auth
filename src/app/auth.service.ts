@@ -1,7 +1,10 @@
+import { UserModel } from './core/models/user.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { environment } from '../environments/environment';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { setUser } from './context/actions/user.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +12,20 @@ import { catchError, retry } from 'rxjs/operators';
 export class AuthService {
   user: any = {};
 
-  constructor(private http: HttpClient) {}
+  user$: Observable<UserModel>;
+
+  constructor(
+    private http: HttpClient,
+    private storeUser: Store<{ user: UserModel }>
+  ) {
+    this.user$ = this.storeUser.select('user');
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   login(email: string | null | undefined, password: string | null | undefined) {
-    return this.http.post('http://localhost:3000/auth/login', {
+    return this.http.post(`${environment.API_URI}auth/login`, {
       email,
       password,
     });
@@ -22,7 +35,7 @@ export class AuthService {
     email: string | null | undefined,
     password: string | null | undefined
   ) {
-    return this.http.post('http://localhost:3000/auth/register', {
+    return this.http.post(`${environment.API_URI}auth/register`, {
       email,
       password,
     });
@@ -33,11 +46,35 @@ export class AuthService {
   }
 
   getUser() {
-    return this.user;
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    };
+    return this.http.get(`${environment.API_URI}users/me`, { headers });
+  }
+
+  updateUser(user: any) {
+    const headers = {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    };
+    return this.http.patch(`${environment.API_URI}users/me/edit`, user, {
+      headers,
+    });
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem('access_token');
+    if (localStorage.getItem('access_token')) {
+      if (this.user.email === '') {
+        this.getUser().subscribe((user: any) => {
+          this.storeUser.dispatch(setUser(user));
+          return true;
+        });
+        return true;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
 
   logout() {

@@ -1,3 +1,3 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-export const selectToken = createFeatureSelector<string>('access_token');
+export const selectUser = createFeatureSelector<string>('user');
